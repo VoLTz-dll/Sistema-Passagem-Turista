@@ -1,7 +1,3 @@
-Claro! Aqui está o conteúdo do arquivo `README.md` para você baixar. Você pode copiar o texto abaixo e salvá-lo como um arquivo chamado `README.md` no diretório raiz do seu projeto.
-
----
-
 # Sistema de Passagens de Trem Turístico
 
 ## Sumário
