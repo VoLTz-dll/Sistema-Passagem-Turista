@@ -1,7 +1,10 @@
 # utils.py
+
 import sys
 import time
 import shutil
+import os
+import platform
 from colorama import Fore, Back, Style, init
 
 # Inicializar o Colorama
@@ -100,3 +103,38 @@ def validar_entrada_numerica(mensagem, valor_minimo=1):
                 print(Fore.RED + f"Valor deve ser maior ou igual a {valor_minimo}. Tente novamente.")
         except ValueError:
             print(Fore.RED + "Entrada inválida. Por favor, insira um número.")
+
+def input_senha(prompt):
+    """Função para entrada de senha com exibição de asteriscos."""
+    senha = ''
+    print(Fore.GREEN + prompt, end='', flush=True)
+    while True:
+        ch = _getch()
+        if ch in ('\r', '\n'):  # Enter
+            print('')
+            break
+        elif ch == '\x03':
+            raise KeyboardInterrupt
+        elif ch == '\x08' or ch == '\x7f':  # Backspace
+            if len(senha) > 0:
+                senha = senha[:-1]
+                # Move o cursor para trás, apaga o caractere e move novamente
+                sys.stdout.write('\b \b')
+                sys.stdout.flush()
+        else:
+            senha += ch
+            sys.stdout.write('*')
+            sys.stdout.flush()
+    return senha
+
+def _getch():
+    """Lê um único caractere sem exibir na tela."""
+    if os.name == 'nt':
+        # Windows
+        import msvcrt
+        ch = msvcrt.getch()
+        if ch in (b'\x00', b'\xe0'):
+            # Teclas especiais (setas, F1-F12, etc.)
+            msvcrt.getch()
+            return ''
+        return ch.decode('utf-8', 'ignore')

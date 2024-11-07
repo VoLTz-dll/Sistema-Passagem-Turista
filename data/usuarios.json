@@ -1,14 +1,53 @@
 {
-    "teste": {
-        "senha": "teste",
-        "reservas": [],
-        "pergunta_recuperacao": "teste",
-        "resposta_recuperacao": "teste"
-    },
-    "Lucas": {
+    "amc": {
         "senha": "123",
-        "reservas": [],
-        "pergunta_recuperacao": "eu mesmo",
-        "resposta_recuperacao": "eu memsmo"
+        "reservas": [
+            {
+                "trem": {
+                    "destino": "Mogi das Cruzes",
+                    "preco": 80.0
+                },
+                "quantidade": 2,
+                "total": 160.0,
+                "data": "09/11/2024",
+                "pagamento": "Dinheiro"
+            }
+        ],
+        "pergunta_recuperacao": "sequencia",
+        "resposta_recuperacao": "uma sequencia"
+    },
+    "adriana": {
+        "senha": "123",
+        "reservas": [
+            {
+                "trem": {
+                    "destino": "Rio de Janeiro",
+                    "preco": 200.0
+                },
+                "quantidade": 4,
+                "total": 800.0,
+                "data": "16/11/2024",
+                "pagamento": "D\u00e9bito"
+            }
+        ],
+        "pergunta_recuperacao": "amor",
+        "resposta_recuperacao": "amor"
+    },
+    "lino": {
+        "senha": "bosta",
+        "reservas": [
+            {
+                "trem": {
+                    "destino": "Porto Alegre",
+                    "preco": 250.0
+                },
+                "quantidade": 20000,
+                "total": 5000000.0,
+                "data": "01/10/2035",
+                "pagamento": "D\u00e9bito"
+            }
+        ],
+        "pergunta_recuperacao": "bosta",
+        "resposta_recuperacao": "bosta"
     }
 }

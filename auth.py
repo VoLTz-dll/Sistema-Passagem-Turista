@@ -1,10 +1,8 @@
 # auth.py
 
-import getpass
 from colorama import Fore, Back
-from datetime import datetime
 from database import carregar_usuarios, salvar_usuarios
-from utils import animacao_carregamento, animacao_sucesso, animacao_cancelamento
+from utils import animacao_carregamento, animacao_sucesso, animacao_cancelamento, input_senha
 
 def registrar_usuario():
     usuarios = carregar_usuarios()
@@ -20,7 +18,7 @@ def registrar_usuario():
         else:
             break
     while True:
-        senha = getpass.getpass(Fore.GREEN + "Digite uma senha (ou 'Voltar' para retornar): ").strip()
+        senha = input_senha("Digite uma senha (ou 'Voltar' para retornar): ").strip()
         if senha.lower() == 'voltar':
             return
         if not senha:
@@ -61,12 +59,12 @@ def recuperar_senha():
         if resposta.lower() == 'voltar':
             return
         if resposta == usuarios[username]["resposta_recuperacao"]:
-            nova_senha = getpass.getpass(Fore.GREEN + "Digite a nova senha (ou 'Voltar' para retornar): ")
+            nova_senha = input_senha("Digite a nova senha (ou 'Voltar' para retornar): ").strip()
             if nova_senha.lower() == 'voltar':
                 return
             while not nova_senha:
                 print(Fore.RED + "Senha não pode ser vazia. Tente novamente.")
-                nova_senha = getpass.getpass(Fore.GREEN + "Digite a nova senha: ")
+                nova_senha = input_senha("Digite a nova senha: ").strip()
             usuarios[username]["senha"] = nova_senha
             salvar_usuarios(usuarios)
             animacao_sucesso("Senha alterada com sucesso! ", duracao=3)
@@ -82,7 +80,7 @@ def login():
         username = input(Fore.GREEN + "Digite seu nome de usuário (ou 'Voltar' para retornar): ")
         if username.lower() == 'voltar':
             return None
-        senha = getpass.getpass(Fore.GREEN + "Digite sua senha (ou 'Voltar' para retornar): ")
+        senha = input_senha("Digite sua senha (ou 'Voltar' para retornar): ").strip()
         if senha.lower() == 'voltar':
             return None
         animacao_carregamento("Validando credenciais", duracao=3, simbolo="⏳")
