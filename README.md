@@ -238,10 +238,6 @@ trens_disponiveis = {
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests no repositório do projeto.
 
-## Licença
-
-Este projeto é licenciado sob a Licença MIT. Consulte o arquivo `LICENSE` para obter mais informações.
-
 ---
 
 **Nota**: Este documento visa fornecer uma visão geral completa do projeto, facilitando a compreensão e o uso do sistema por novos desenvolvedores e usuários. Para dúvidas ou sugestões, entre em contato com os mantenedores do projeto.
