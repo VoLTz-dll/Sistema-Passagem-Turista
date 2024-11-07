@@ -1,0 +1,14 @@
+{
+    "teste": {
+        "senha": "teste",
+        "reservas": [],
+        "pergunta_recuperacao": "teste",
+        "resposta_recuperacao": "teste"
+    },
+    "Lucas": {
+        "senha": "123",
+        "reservas": [],
+        "pergunta_recuperacao": "eu mesmo",
+        "resposta_recuperacao": "eu memsmo"
+    }
+}
