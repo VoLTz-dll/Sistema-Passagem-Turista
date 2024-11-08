@@ -43,18 +43,35 @@ def reservar_passagem(usuario):
             numero_passagens = validar_entrada_numerica("Digite o número de passagens (ou 'Voltar' para retornar): ")
             if numero_passagens == 'Voltar':
                 return
-            data_reserva = input(Fore.GREEN + "Digite a data da viagem (dd/mm/aaaa) (ou 'Voltar' para retornar): ")
-            if data_reserva.lower() == 'voltar':
-                return
-            try:
-                datetime.strptime(data_reserva, "%d/%m/%Y")
-            except ValueError:
-                print(Fore.RED + "\nData inválida. A reserva não foi concluída.\n")
-                return
+            while True:
+                data_reserva = input(Fore.GREEN + "Digite a data da viagem (dd/mm/aaaa) (ou 'Voltar' para retornar): ")
+                if data_reserva.lower() == 'voltar':
+                    return
+                try:
+                    data_viagem = datetime.strptime(data_reserva, "%d/%m/%Y").date()
+                    if data_viagem < datetime.today().date():
+                        print(Fore.RED + "\nA data da viagem não pode ser no passado. Tente novamente.\n")
+                    else:
+                        break
+                except ValueError:
+                    print(Fore.RED + "\nFormato de data inválido. Por favor, use o formato dd/mm/aaaa.\n")
 
             total = trem_selecionado['preco'] * numero_passagens
             forma_pagamento = selecionar_forma_pagamento()
             if forma_pagamento == "Voltar":
+                return
+
+            # Exibir resumo da reserva e solicitar confirmação
+            print("\nResumo da Reserva:")
+            print(f"Destino: {trem_selecionado['destino']}")
+            print(f"Quantidade de Passagens: {numero_passagens}")
+            print(f"Data da Viagem: {data_reserva}")
+            print(f"Forma de Pagamento: {forma_pagamento}")
+            print(f"Total a Pagar: R${total:.2f}")
+
+            confirm = inquirer.confirm(message="Deseja confirmar a reserva?", default=True)
+            if not confirm:
+                animacao_cancelamento("Reserva cancelada pelo usuário. ", duracao=2)
                 return
 
             animacao_carregamento("Processando reserva", duracao=4, simbolo="⏳")
@@ -104,6 +121,13 @@ def cancelar_reserva(usuario):
         if resposta['reserva'] == "Voltar":
             return
         reserva_index = reserva_choices.index(resposta['reserva'])
+
+        # Confirmação antes de cancelar
+        confirm = inquirer.confirm(message="Tem certeza de que deseja cancelar esta reserva?", default=False)
+        if not confirm:
+            animacao_cancelamento("Cancelamento abortado pelo usuário. ", duracao=2)
+            return
+
         reservas.pop(reserva_index)
         usuarios[usuario]["reservas"] = reservas
         salvar_usuarios(usuarios)
